@@ -1,0 +1,12 @@
+[versions]
+detekt = "1.23.6"  # Note: Plugin versions must be updated in the settings.gradle.kts too
+kotlin = "2.0.20-Beta1"  # Note: Plugin versions must be updated in the settings.gradle.kts too
+
+kx-ser = "1.7.1"
+logging = "7.0.0"
+
+[libraries]
+detekt = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
+kx-ser = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kx-ser" }
+logging = { module = "io.github.oshai:kotlin-logging", version.ref = "logging" }
