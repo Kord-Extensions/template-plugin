@@ -1,6 +1,6 @@
 pluginManagement {
 	plugins {
-		kotlin("jvm") version "2.0.20-Beta1"
+		kotlin("jvm") version "2.0.20-RC2"
 		kotlin("plugin.serialization") version "2.0.20-Beta1"
 
 		// Update this in libs.version.toml when you change it here.
