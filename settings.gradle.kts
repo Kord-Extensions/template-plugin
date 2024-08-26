@@ -6,7 +6,7 @@ pluginManagement {
 		// Update this in libs.version.toml when you change it here.
 		id("io.gitlab.arturbosch.detekt") version "1.23.6"
 
-		id("dev.kordex.gradle.kordex") version "1.3.0"
+		id("dev.kordex.gradle.kordex") version "1.4.2"
 	}
 }
 
