@@ -5,7 +5,6 @@ includes the following:
 
 - A basic plugin with a standard configuration, loading a basic extension that allows you to slap other people, using
   both chat commands and slash commands.
-
 - A Gradle Kotlin build script that uses the KordEx Gradle plugin and Detekt for linting (with a
   fairly strict configuration) – this uses Gradle 7's new version catalogue feature, for easy configuration of
   dependencies.
@@ -28,7 +27,8 @@ feedback or PRs targeting this approach, though you can always change it in your
   start.
 - In the `build.gradle.kts`:
   - Set the `group` and `version` properties as appropriate.
-  - In the `kordEx` block, update your plugin's configuration as appropriate.
+  - In the `kordEx` block, update the KordEx version if needed.
+  - In the `plugins` block in the `kordEx` block, update your plugin's configuration as appropriate.
 - In the `settings.gradle.kts`, update the name of the root project as appropriate.
 - The bundled Detekt config is pretty strict — you can check over `detekt.yml` if you want to change it, but you need to
   follow the to-dos in that file regardless.

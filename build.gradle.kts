@@ -21,6 +21,8 @@ dependencies {
 }
 
 kordEx {
+	kordExVersion = "2.2.0-SNAPSHOT"
+
 	plugin {
 		id = "kordex-template-plugin"
 		pluginClass = "template.plugins.TemplatePlugin"
@@ -30,7 +32,7 @@ kordEx {
 		description = "Example plugin from the template repository."
 		license = "Unlicense"
 
-		kordExVersion(">= 2.0.0") // KordEx 2 or later
+		kordExVersion(">= 2.2.0") // KordEx 2.2.0 or later
 	}
 }
 
