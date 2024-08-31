@@ -10,14 +10,16 @@ import dev.kordex.core.extensions.Extension
 import dev.kordex.core.extensions.chatCommand
 import dev.kordex.core.extensions.publicSlashCommand
 import dev.kordex.core.utils.respond
+import template.TRANSLATION_BUNDLE
 
 class TestExtension : Extension() {
 	override val name = "test"
+	override val bundle: String = TRANSLATION_BUNDLE
 
 	override suspend fun setup() {
 		chatCommand(::SlapArgs) {
-			name = "slap"
-			description = "Ask the bot to slap another user"
+			name = "commands.slap.name"
+			description = "commands.slap.description"
 
 			check { failIf(event.message.author == null) }
 
@@ -29,13 +31,15 @@ class TestExtension : Extension() {
 					arguments.target
 				}
 
-				message.respond("*slaps ${realTarget.mention} with their ${arguments.weapon}*")
+				message.respond(
+					"_${translate("commands.slap.action", arrayOf(realTarget.mention, arguments.weapon))}_"
+				)
 			}
 		}
 
 		chatCommand {
-			name = "button"
-			description = "A simple example command that sends a button."
+			name = "commands.button.name"
+			description = "commands.button.description"
 
 			check { failIf(event.message.author == null) }
 
@@ -43,11 +47,12 @@ class TestExtension : Extension() {
 				message.respond {
 					components {
 						publicButton {
-							label = "Button!"
+							bundle = TRANSLATION_BUNDLE
+							label = translate("commands.button.label")
 
 							action {
 								respond {
-									content = "You pushed the button!"
+									content = translate("commands.button.action")
 								}
 							}
 						}
@@ -57,36 +62,37 @@ class TestExtension : Extension() {
 		}
 
 		publicSlashCommand(::SlapSlashArgs) {
-			name = "slap"
-			description = "Ask the bot to slap another user"
+			name = "commands.slap.name"
+			description = "commands.slap.description"
 
 			action {
 				// Don't slap ourselves on request, slap the requester!
 				val realTarget = if (arguments.target.id == event.kord.selfId) {
-					member
+					user
 				} else {
 					arguments.target
 				}
 
 				respond {
-					content = "*slaps ${realTarget?.mention} with their ${arguments.weapon}*"
+					content = "_${translate("commands.slap.action", arrayOf(realTarget.mention, arguments.weapon))}_"
 				}
 			}
 		}
 
 		publicSlashCommand {
-			name = "button"
-			description = "A simple example command that sends a button."
+			name = "commands.button.name"
+			description = "commands.button.description"
 
 			action {
 				respond {
 					components {
 						publicButton {
-							label = "Button!"
+							bundle = TRANSLATION_BUNDLE
+							label = translate("commands.button.label")
 
 							action {
 								respond {
-									content = "You pushed the button!"
+									content = translate("commands.button.action")
 								}
 							}
 						}
@@ -98,30 +104,30 @@ class TestExtension : Extension() {
 
 	inner class SlapArgs : Arguments() {
 		val target by user {
-			name = "target"
-			description = "Person you want to slap"
+			name = "commands.slap.args.target.name"
+			description = "commands.slap.args.target.description"
 		}
 
 		val weapon by coalescingDefaultingString {
-			name = "weapon"
+			name = "commands.slap.args.weapon.name"
 
-			defaultValue = "large, smelly trout"
-			description = "What you want to slap with"
+			defaultValue = "🐡"
+			description = "commands.slap.args.weapon.description"
 		}
 	}
 
 	inner class SlapSlashArgs : Arguments() {
 		val target by user {
-			name = "target"
-			description = "Person you want to slap"
+			name = "commands.slap.args.target.name"
+			description = "commands.slap.args.target.description"
 		}
 
 		// Slash commands don't support coalescing strings
 		val weapon by defaultingString {
-			name = "weapon"
+			name = "commands.slap.args.weapon.name"
 
-			defaultValue = "large, smelly trout"
-			description = "What you want to slap with"
+			defaultValue = "🐡"
+			description = "commands.slap.args.weapon.description"
 		}
 	}
 }

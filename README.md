@@ -5,6 +5,7 @@ includes the following:
 
 - A basic plugin with a standard configuration, loading a basic extension that allows you to slap other people, using
   both chat commands and slash commands.
+- A set of translations in `src/main/resources`, along with a constant in `Constant.kt` referring to the bundle.
 - A Gradle Kotlin build script that uses the KordEx Gradle plugin and Detekt for linting (with a
   fairly strict configuration) – this uses Gradle 7's new version catalogue feature, for easy configuration of
   dependencies.
