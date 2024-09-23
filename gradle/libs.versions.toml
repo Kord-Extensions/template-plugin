@@ -2,7 +2,7 @@
 detekt = "1.23.6"  # Note: Plugin versions must be updated in the settings.gradle.kts too
 kotlin = "2.0.20"  # Note: Plugin versions must be updated in the settings.gradle.kts too
 
-kx-ser = "1.7.2"
+kx-ser = "1.7.3"
 logging = "7.0.0"
 
 [libraries]
