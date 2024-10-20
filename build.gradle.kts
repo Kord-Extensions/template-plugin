@@ -1,5 +1,3 @@
-import dev.kordex.gradle.plugins.kordex.DataCollection
-
 plugins {
 	kotlin("jvm")
 	kotlin("plugin.serialization")
@@ -21,7 +19,7 @@ dependencies {
 }
 
 kordEx {
-	kordExVersion = "2.2.1-SNAPSHOT"
+	kordExVersion = "2.3.0-SNAPSHOT"
 
 	plugin {
 		id = "kordex-template-plugin"
@@ -32,7 +30,12 @@ kordEx {
 		description = "Example plugin from the template repository."
 		license = "Unlicense"
 
-		kordExVersion(">= 2.2.1") // KordEx 2.2.1 or later
+		kordExVersion(">= 2.3.0") // KordEx 2.3.0 or later
+	}
+
+	i18n {
+		classPackage = "template.i18n"
+		translationBundle = "template.strings"
 	}
 }
 

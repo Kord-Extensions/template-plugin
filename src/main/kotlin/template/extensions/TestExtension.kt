@@ -9,17 +9,17 @@ import dev.kordex.core.components.publicButton
 import dev.kordex.core.extensions.Extension
 import dev.kordex.core.extensions.chatCommand
 import dev.kordex.core.extensions.publicSlashCommand
+import dev.kordex.core.i18n.withContext
 import dev.kordex.core.utils.respond
-import template.TRANSLATION_BUNDLE
+import template.i18n.Translations
 
 class TestExtension : Extension() {
 	override val name = "test"
-	override val bundle: String = TRANSLATION_BUNDLE
 
 	override suspend fun setup() {
 		chatCommand(::SlapArgs) {
-			name = "commands.slap.name"
-			description = "commands.slap.description"
+			name = Translations.Commands.Slap.name
+			description = Translations.Commands.Slap.description
 
 			check { failIf(event.message.author == null) }
 
@@ -32,14 +32,16 @@ class TestExtension : Extension() {
 				}
 
 				message.respond(
-					"_${translate("commands.slap.action", arrayOf(realTarget.mention, arguments.weapon))}_"
+					Translations.Commands.Slap.action
+						.withContext(this)
+						.translate(realTarget.mention, arguments.weapon)
 				)
 			}
 		}
 
 		chatCommand {
-			name = "commands.button.name"
-			description = "commands.button.description"
+			name = Translations.Commands.Button.name
+			description = Translations.Commands.Button.description
 
 			check { failIf(event.message.author == null) }
 
@@ -47,12 +49,14 @@ class TestExtension : Extension() {
 				message.respond {
 					components {
 						publicButton {
-							bundle = TRANSLATION_BUNDLE
-							label = translate("commands.button.label")
+							label = Translations.Commands.Button.label
+								.withLocale(getLocale())
 
 							action {
 								respond {
-									content = translate("commands.button.action")
+									content = Translations.Commands.Button.action
+										.withLocale(getLocale())
+										.translate()
 								}
 							}
 						}
@@ -62,8 +66,8 @@ class TestExtension : Extension() {
 		}
 
 		publicSlashCommand(::SlapSlashArgs) {
-			name = "commands.slap.name"
-			description = "commands.slap.description"
+			name = Translations.Commands.Slap.name
+			description = Translations.Commands.Slap.description
 
 			action {
 				// Don't slap ourselves on request, slap the requester!
@@ -74,25 +78,29 @@ class TestExtension : Extension() {
 				}
 
 				respond {
-					content = "_${translate("commands.slap.action", arrayOf(realTarget.mention, arguments.weapon))}_"
+					content = Translations.Commands.Slap.action
+						.withContext(this@action)
+						.translate(realTarget.mention, arguments.weapon)
 				}
 			}
 		}
 
 		publicSlashCommand {
-			name = "commands.button.name"
-			description = "commands.button.description"
+			name = Translations.Commands.Button.name
+			description = Translations.Commands.Button.description
 
 			action {
 				respond {
 					components {
 						publicButton {
-							bundle = TRANSLATION_BUNDLE
-							label = translate("commands.button.label")
+							label = Translations.Commands.Button.label
+								.withLocale(getLocale())
 
 							action {
 								respond {
-									content = translate("commands.button.action")
+									content = Translations.Commands.Button.action
+										.withLocale(getLocale())
+										.translate()
 								}
 							}
 						}
@@ -104,30 +112,30 @@ class TestExtension : Extension() {
 
 	inner class SlapArgs : Arguments() {
 		val target by user {
-			name = "commands.slap.args.target.name"
-			description = "commands.slap.args.target.description"
+			name = Translations.Commands.Slap.Args.Target.name
+			description = Translations.Commands.Slap.Args.Target.description
 		}
 
 		val weapon by coalescingDefaultingString {
-			name = "commands.slap.args.weapon.name"
+			name = Translations.Commands.Slap.Args.Weapon.name
 
 			defaultValue = "🐡"
-			description = "commands.slap.args.weapon.description"
+			description = Translations.Commands.Slap.Args.Weapon.description
 		}
 	}
 
 	inner class SlapSlashArgs : Arguments() {
 		val target by user {
-			name = "commands.slap.args.target.name"
-			description = "commands.slap.args.target.description"
+			name = Translations.Commands.Slap.Args.Target.name
+			description = Translations.Commands.Slap.Args.Target.description
 		}
 
 		// Slash commands don't support coalescing strings
 		val weapon by defaultingString {
-			name = "commands.slap.args.weapon.name"
+			name = Translations.Commands.Slap.Args.Weapon.name
 
 			defaultValue = "🐡"
-			description = "commands.slap.args.weapon.description"
+			description = Translations.Commands.Slap.Args.Weapon.description
 		}
 	}
 }
