@@ -4,7 +4,7 @@ pluginManagement {
 		kotlin("plugin.serialization") version "2.0.21"
 
 		// Update this in libs.version.toml when you change it here.
-		id("io.gitlab.arturbosch.detekt") version "1.23.6"
+		id("io.gitlab.arturbosch.detekt") version "1.23.7"
 
 		id("dev.kordex.gradle.kordex") version "1.5.1"
 	}
